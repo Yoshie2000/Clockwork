@@ -407,15 +407,16 @@ Value Worker::search(
     for (Move m = moves.next(); m != Move::none(); m = moves.next()) {
         bool quiet = quiet_move(m);
 
-        auto move_history = quiet ? m_td.history.get_quiet_stats(pos, m, ply, ss) : 0;
+        auto move_history = quiet ? m_td.history.get_quiet_stats(pos, m, ply, ss) : m_td.history.get_noisy_stats(pos, m);
 
         if (!ROOT_NODE && best_value > -VALUE_WIN) {
             // Late Move Pruning (LMP)
             if (moves_played >= 3 + depth * depth) {
                 break;
             }
-            // Quiet History Pruning
-            if (depth <= 4 && !is_in_check && quiet && move_history < depth * -2048) {
+            // History Pruning
+            auto hp_factor = quiet ? -2048 : -4096;
+            if (depth <= 4 && !is_in_check && move_history < depth * hp_factor) {
                 break;
             }
 
