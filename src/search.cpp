@@ -454,10 +454,6 @@ Value Worker::search(
                 reduction -= move_history / 8;
             }
 
-            if (!quiet) {
-                reduction = std::min(reduction, 1024);
-            }
-
             reduction /= 1024;
 
             Depth reduced_depth = std::clamp<Depth>(new_depth - reduction, 1, new_depth);
