@@ -503,7 +503,7 @@ Value Worker::search(
             }
 
             if (!quiet) {
-                reduction = std::min(reduction, 2048);
+                reduction = std::min(2 * reduction / 3, 2048);
             }
 
             reduction /= 1024;
