@@ -502,7 +502,7 @@ Value Worker::search(
         repetition_info.push(pos_after.get_hash_key(), pos_after.is_reversible(m));
 
         // Get search value
-        Depth new_depth = depth - 1 + extension;
+        Depth new_depth = depth - 1 + std::max(extension, static_cast<int>(pos_after.is_in_check()));
         Value value;
         if (depth >= 3 && moves_played >= 2 + 2 * PV_NODE) {
             i32 reduction = static_cast<i32>(
