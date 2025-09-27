@@ -499,7 +499,7 @@ Value Worker::search(
               std::round(1024 * (0.77 + std::log(depth) * std::log(moves_played) / 2.36)));
             reduction -= 1024 * PV_NODE;
 
-            reduction += alpha_raises * 512;
+            reduction += alpha_raises * 1024;
 
             if (cutnode) {
                 reduction += 1024;
