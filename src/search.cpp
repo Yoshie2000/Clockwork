@@ -611,8 +611,7 @@ Value Worker::search(
     Bound bound   = best_value >= beta        ? Bound::Lower
                   : best_move != Move::none() ? Bound::Exact
                                               : Bound::Upper;
-    Move  tt_move = best_move != Move::none() ? best_move : tt_data ? tt_data->move : Move::none();
-    m_searcher.tt.store(pos, ply, raw_eval, tt_move, best_value, depth, bound);
+    m_searcher.tt.store(pos, ply, raw_eval, best_move, best_value, depth, bound);
 
     // Update to correction history.
     if (!is_in_check
