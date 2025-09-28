@@ -564,12 +564,16 @@ Value Worker::search(
                 }
                 alpha     = value;
                 best_move = m;
-                alpha_raises++;
 
                 if (value >= beta) {
                     ss->fail_high_count++;
                     break;
                 }
+
+                if (depth >= 4 && depth <= 10)
+                    depth--;
+                else
+                    alpha_raises++;
             }
         }
 
