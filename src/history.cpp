@@ -10,7 +10,7 @@ i32 History::get_conthist(const Position& pos, Move move, i32 ply, Search::Stack
     PieceType pt      = pos.piece_at(move.from());
     usize     pt_idx  = static_cast<usize>(pt) - static_cast<usize>(PieceType::Pawn);
     if (ply >= 1 && (ss - 1)->cont_hist_entry != nullptr) {
-        stats += (*(ss - 1)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw];
+        stats += 2 * (*(ss - 1)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw];
     }
     if (ply >= 2 && (ss - 2)->cont_hist_entry != nullptr) {
         stats += (*(ss - 2)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw];
