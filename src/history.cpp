@@ -15,9 +15,6 @@ i32 History::get_conthist(const Position& pos, Move move, i32 ply, Search::Stack
     if (ply >= 2 && (ss - 2)->cont_hist_entry != nullptr) {
         stats += (*(ss - 2)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw];
     }
-    if (ply >= 3 && (ss - 3)->cont_hist_entry != nullptr) {
-        stats += (*(ss - 3)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw] / 2;
-    }
     if (ply >= 4 && (ss - 4)->cont_hist_entry != nullptr) {
         stats += (*(ss - 4)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw];
     }
@@ -54,6 +51,10 @@ void History::update_quiet_stats(
     if (ply >= 2 && (ss - 2)->cont_hist_entry != nullptr) {
         update_hist_entry_banger((*(ss - 2)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw],
                                  conthist, bonus);
+    }
+    if (ply >= 3 && (ss - 3)->cont_hist_entry != nullptr) {
+        update_hist_entry_banger((*(ss - 3)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw],
+                                 conthist, bonus, 2);
     }
     if (ply >= 4 && (ss - 4)->cont_hist_entry != nullptr) {
         update_hist_entry_banger((*(ss - 4)->cont_hist_entry)[stm_idx][pt_idx][move.to().raw],
